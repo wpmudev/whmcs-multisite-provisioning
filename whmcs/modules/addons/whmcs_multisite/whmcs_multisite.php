@@ -10,7 +10,7 @@ Text Domain: mrp
 Domain Path: languages
 Version: 1.0
 Network: true
-WDP ID: 258
+WDP ID: 264
 */
 
 if (!defined("WHMCS"))
@@ -18,7 +18,7 @@ die("This file cannot be accessed directly");
 
 function whmcs_multisite_config() {
 	$configarray = array(
-	"name" => "WHMCS Multisite Provisioning Addon",
+	"name" => "WHMCS Multisite Provisioning",
 	"version" => "1.0",
 	"author" => "wpmudev.org",
 	"language" => "english",
@@ -26,7 +26,7 @@ function whmcs_multisite_config() {
 	"fields" => array(
 
 	/*
-	"option1" => array ("FriendlyName" => "Option1", "Type" => "text", "Size" => "25", "Description" => "Textbox"),
+	"option1" => array ("FriendlyName" => "Multisite Administrator", "Type" => "text", "Size" => "25", "Description" => "Name of an administrator with rights to the Multisite Addon."),
 	"option2" => array ("FriendlyName" => "Option2", "Type" => "password", "Size" => "25", "Description" => "Password"),
 	"option3" => array ("FriendlyName" => "Option3", "Type" => "yesno", "Size" => "25", "Description" => "Sample Check Box"),
 	"option4" => array ("FriendlyName" => "Option4", "Type" => "textarea", "Size" => "25", "Description" => "Textarea"),

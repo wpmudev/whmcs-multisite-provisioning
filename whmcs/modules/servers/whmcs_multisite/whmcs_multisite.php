@@ -10,7 +10,7 @@ Text Domain: mrp
 Domain Path: languages
 Version: 1.0
 Network: true
-WDP ID: 258
+WDP ID: 264
 */
 
 function whmcs_multisite_ConfigOptions() {
@@ -24,6 +24,7 @@ function whmcs_multisite_ConfigOptions() {
 	"Use Domain field" => array( "Type" => "yesno", "Description" => "Tick if you created a custom Domain field." ),
 	"Default Role" => array( "Type" => "text", "Size" => "25", "Description" => "<br />This is the role that will be assigned to a user created by this product." ),
 	"Web Space Quota" => array( "Type" => "text", "Size" => "5", "Description" => "MB <br />Allowed upload space or leave blank to use Wordpress defaults." ),
+	"Product Administrator" => array( "Type" => "text", "Size" => "25", "Description" => "<br />The WHMCS Administrator authorizing this product.<br />REQUIRED for the API to function" ),
 	//"Subdomains" => array( "Type" => "dropdown", "Options" => "1,2,5,10,25,50,Unlimited"),
 	);
 
@@ -137,6 +138,10 @@ function whmcs_multisite_CreateAccount($params) {
 	// Default Wordpress user name everything before the @ in their whmcs email
 	$wp_user_name = explode('@',$clientsdetails['email']);
 	$wp_user_name = $wp_user_name[0];
+	
+	$api_admin = $params["configoption7"];
+	
+	if (empty($api_admin)) return 'Product does not have an authorizing administrator defined. Please update the product module setting.';
 
 	$request = array();
 
@@ -212,7 +217,7 @@ function whmcs_multisite_CreateAccount($params) {
 		}else{
 			$update['domain'] = $ret['mapped_domain'];
 		}
-		$result = localAPI('updateclientproduct', $update,'wpadmin');
+		$result = localAPI('updateclientproduct', $update, $api_admin);
 
 		$result = ($result['result']=='success') ? $result['result'] : $result['message'];
 	}

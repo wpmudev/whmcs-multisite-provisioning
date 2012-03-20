@@ -32,9 +32,9 @@ Passwords may be chaged from WHMCS Admin but they DO NOT feed back from Wordpres
 Copy the whmcs/Modules directory over your Modules directory in your WHMCS installation.
 This adds a Server Module named "whmcs_multisite" and an Addon module named "whmcs_multisite".
 
-Create an Administrator in WHMCS with the username 'wpadmin'. This is necessary to authorize Wordpress to update your 
-service information after a site is created. The only important part is that the username be 'wpadmin' and that you give 
-it's administartor level permission to create the product.
+IMPORTANT: Create an Administrator in WHMCS who will authorize Multisite products. This is necessary to authorize Wordpress to update your 
+service information after a site is created. If not filled in the Product creation will fail. 
+The only important part is that the username has administartor level permission to create the product.
 
 == WHMCS Server Module configuration ==
 1. In WHMCS admin go to Setup | Servers and Add New Server
@@ -100,15 +100,15 @@ with the Wordpress users email, a new user will be created using the WHMCS Clien
 the portion before the '@' as the users name. If you are Accepting Orders in Admin before creation you 
 can change the default username there. Once the username is created it cannot be changed. 
 
-1. If the WHMCS clients email address already exists as a user in Wordpress the Wordpress user account 
+2. If the WHMCS clients email address already exists as a user in Wordpress the Wordpress user account 
 will override what you may put in WHMCS. Wordpress user names can not be changed and this is enforced in WHMCS.
 
-1. WHMCS generates random passwords when creating a service. If a new Wordpress user is 
+3. WHMCS generates random passwords when creating a service. If a new Wordpress user is 
 created as a result this random password is the password for the new user. If the user already exists 
 in Wordpress WHMCS still generates a random password but it does NOT change the Wordpress password. 
 WHMCS can change the password on Wordpress but Wordpress password changes will not be feed back to WHMCS.
 
-1. Each WHMCS service creates different random passwords so they will not match if a Client has more than one 
+4. Each WHMCS service creates different random passwords so they will not match if a Client has more than one 
 service at the same Wordpress site.
 
 == Change log ==
