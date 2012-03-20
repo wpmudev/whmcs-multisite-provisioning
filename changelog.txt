@@ -1,0 +1,7 @@
+Plugin Name: WHMCS Multisite Provisioning
+Author: Arnold Bailey
+
+== Change Log ==
+
+= 1.0 =
+* Initial public release
