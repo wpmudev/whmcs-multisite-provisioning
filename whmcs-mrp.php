@@ -7,7 +7,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0
+Version: 1.0.1
 Network: true
 WDP ID: 264
 */
@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if ( !is_multisite() )
 exit( __('The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite.', 'mrp') );
 
-define('MRP_VERSION','1.0');
+define('MRP_VERSION','1.0.1');
 
 $whmcs_multisite_provisioning = new WHMCS_Multisite_Provisioning();
 
@@ -228,7 +228,6 @@ class WHMCS_Multisite_Provisioning{
 	* ['credentials']
 	*
 	* @todo Honor the registration settings in WP Network settings. none user blog or all
-	8
 	*/
 	function create_blog(){
 		global $wpdb,$current_user,$current_site,$base;
@@ -424,7 +423,7 @@ class WHMCS_Multisite_Provisioning{
 		}
 
 		//Create the blog uploads directory
-		mkdir(WP_CONTENT_DIR.'/blogs.dir/'.$id . '/files', 755, true);
+		mkdir(WP_CONTENT_DIR.'/blogs.dir/'.$id . '/files', 0755, true); //0755 octal
 
 		//All done
 		$this->response['success'] = true;
@@ -561,7 +560,7 @@ class WHMCS_Multisite_Provisioning{
 			<div class="metabox-holder">
 				<div class="postbox">
 					<div class="inside">
-						<form method="POST" action="">
+						<form method="POST" action="#">
 							<?php wp_nonce_field('mrp_admin','mrp_wpnonce'); ?>
 							<h3 class="hndle"><?php _e('WHMCS Multisite Provisioning','mrp'); ?></h3>
 							<table class="form-table">
@@ -584,7 +583,7 @@ class WHMCS_Multisite_Provisioning{
 											<?php _e('(one per line)','mrp'); ?><br />
 											<?php _e('Leave blank to disable IP filtering','mrp'); ?>
 										</th>
-										<td><textarea name="mrp[ips]" size="40" rows="4"><?php echo esc_attr($settings['ips']); ?></textarea></td>
+										<td><textarea name="mrp[ips]" cols="40" rows="4"><?php echo esc_attr($settings['ips']); ?></textarea></td>
 									</tr>
 								</tbody>
 							</table>
@@ -598,14 +597,14 @@ class WHMCS_Multisite_Provisioning{
 	}
 }
 
-/* Update Notifications Notice */
+///////////////////////////////////////////////////////////////////////////
+/* -------------------- Update Notifications Notice ---------------------*/
 if ( !function_exists( 'wdp_un_check' ) ) {
 	add_action( 'admin_notices', 'wdp_un_check', 5 );
 	add_action( 'network_admin_notices', 'wdp_un_check', 5 );
 	function wdp_un_check() {
 		if ( !class_exists( 'WPMUDEV_Update_Notifications' ) && current_user_can( 'install_plugins' ) )
-		echo '<div class="error fade"><p>' . __('Please install the latest version of <a href="http://premium.wpmudev.org/project/update-notifications/" title="Download Now &raquo;">our free Update Notifications plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins. <a href="http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/">More information &raquo;</a>', 'wpmudev') . '</a></p></div>';
+		echo '<div class="error fade"><p>' . __('Please install the latest version of <a href="http://premium.wpmudev.org/project/update-notifications/" title="Download Now &raquo;">our free Update Notifications plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins. <a href="http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/" >More information &raquo;</a>', 'wpmudev') . "</p></div>\n";
 	}
 }
-
-?>
+/* --------------------------------------------------------------------- */

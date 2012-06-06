@@ -3,5 +3,8 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.0.1 =
+* Changed blog.dir permission to the correct 0755 octal value.
+
 = 1.0 =
 * Initial public release
