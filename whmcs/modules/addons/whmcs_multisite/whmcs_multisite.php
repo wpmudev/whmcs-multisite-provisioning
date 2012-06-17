@@ -8,7 +8,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0
+Version: 1.0.2
 Network: true
 WDP ID: 264
 */
@@ -19,7 +19,7 @@ die("This file cannot be accessed directly");
 function whmcs_multisite_config() {
 	$configarray = array(
 	"name" => "WHMCS Multisite Provisioning",
-	"version" => "1.0",
+	"version" => "1.0.2",
 	"author" => "wpmudev.org",
 	"language" => "english",
 

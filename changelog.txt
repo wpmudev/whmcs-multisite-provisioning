@@ -3,6 +3,9 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.0.2 =
+* Changed disabled to readonly on product fields because disabled fields aren't returned on edit wiping them out.
+
 = 1.0.1 =
 * Changed blog.dir permission to the correct 0755 octal value.
 

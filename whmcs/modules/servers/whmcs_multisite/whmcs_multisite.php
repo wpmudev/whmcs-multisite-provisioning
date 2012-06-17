@@ -8,7 +8,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0
+Version: 1.0.2
 Network: true
 WDP ID: 264
 */
@@ -484,7 +484,7 @@ function whmcs_multisite_LoginLink($params) {
 			input[name="domain"],\
 			input[name^="customfield"],\
 			select[name^="packageid"],\
-			').attr('disabled','disabled');
+			').attr('readonly','readonly');
 		});
 	</script>
 	<a href="http://<?php echo $params["serverhostname"]; ?>/wp-admin/?log=<?php echo $params["username"] .'&pwd=' . $params['serverpassword']; ?>" target="wpadmin" style="color:#cc0000">Login to Wordpress</a>
