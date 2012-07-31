@@ -8,7 +8,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.2
+Version: 1.0.3
 Network: true
 WDP ID: 264
 */
@@ -187,8 +187,8 @@ function whmcs_multisite_CreateAccount($params) {
 	//return print_r($response,true);
 
 	if (empty($ret)) {
-		if(! empty($response[2])) return $response[2];
-		return "Invalid data: The receiving plugin may not be activated at: $url";
+		if (! empty($response[2])) return $response[2];
+		return "Invalid data or no response: The receiving plugin may not be activated at: $url";
 	}
 
 	if (is_array($ret) && isset($ret['error'])) {

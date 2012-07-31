@@ -3,6 +3,10 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.0.3 =
+* Checked blog.dir creation.
+* Added dashboard notification
+
 = 1.0.2 =
 * Changed disabled to readonly on product fields because disabled fields aren't returned on edit wiping them out.
 
