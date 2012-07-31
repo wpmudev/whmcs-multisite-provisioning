@@ -423,7 +423,9 @@ class WHMCS_Multisite_Provisioning{
 		}
 
 		//Create the blog uploads directory
-		mkdir(WP_CONTENT_DIR.'/blogs.dir/'.$id . '/files', 0755, true); //0755 octal
+		if( ! is_dir( WP_CONTENT_DIR.'/blogs.dir/'.$id . '/files' ) ) {
+			mkdir(WP_CONTENT_DIR.'/blogs.dir/'.$id . '/files', 0755, true); //0755 octal
+		}
 
 		//All done
 		$this->response['success'] = true;
