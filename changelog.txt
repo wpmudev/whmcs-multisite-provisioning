@@ -3,6 +3,9 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.0.4 =
+* Added Provision Server module logging to support debugging the WHMCS side.
+
 = 1.0.3 =
 * Checked blog.dir creation.
 * Added dashboard notification

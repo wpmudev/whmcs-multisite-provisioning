@@ -8,7 +8,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.3
+Version: 1.0.4
 Network: true
 WDP ID: 264
 */
@@ -21,7 +21,7 @@ function whmcs_multisite_ConfigOptions() {
 	"Default Blog Title" => array( "Type" => "text", "Size" => "25", "Description" => "<br />Title given to the blog if one is not entered in the Title custom field.", ),
 	"Default Blog Domain" => array( "Type" => "text", "Size" => "25", "Description" => "<br />Domain name given to the blog if one is not entered in the Domain custom field.", ),
 	"Use Title field" => array( "Type" => "yesno", "Description" => "Tick if you created a custom Title field." ),
-	"Use Domain field" => array( "Type" => "yesno", "Description" => "Tick if you created a custom Domain field." ),
+	"Use Domain field" => array( "Type" => "yesno", "DescriPtion" => "Tick if you created a custom Domain field." ),
 	"Default Role" => array( "Type" => "text", "Size" => "25", "Description" => "<br />This is the role that will be assigned to a user created by this product." ),
 	"Web Space Quota" => array( "Type" => "text", "Size" => "5", "Description" => "MB <br />Allowed upload space or leave blank to use Wordpress defaults." ),
 	"Product Administrator" => array( "Type" => "text", "Size" => "25", "Description" => "<br />The WHMCS Administrator authorizing this product.<br />REQUIRED for the API to function" ),
@@ -184,6 +184,8 @@ function whmcs_multisite_CreateAccount($params) {
 
 	$ret = json_decode($response[0], true);
 
+	logModuleCall('WHMCS_Multisite Server', 'CreateAccount', $post_fields, $response, $ret, array() );
+
 	//return print_r($response,true);
 
 	if (empty($ret)) {
@@ -265,6 +267,8 @@ function whmcs_multisite_TerminateAccount($params) {
 
 	$ret = json_decode($response[0], true);
 
+	logModuleCall('WHMCS_Multisite Server', 'TerminateAccount', $post_fields, $response, $ret, array() );
+
 	if (empty($ret)) {
 		if(! empty($response[2])) return $response[2];
 		return "Invalid data: The receiving plugin may not be activated at: $url";
@@ -312,6 +316,8 @@ function whmcs_multisite_SuspendAccount($params) {
 	$response = get_url($url, $post_fields);
 
 	$ret = json_decode($response[0], true);
+
+	logModuleCall('WHMCS_Multisite Server', 'SuspendAccount', $post_fields, $response, $ret, array() );
 
 	if (empty($ret)) {
 		if(! empty($response[2])) return $response[2];
@@ -361,6 +367,8 @@ function whmcs_multisite_UnsuspendAccount($params) {
 	$response = get_url($url, $post_fields);
 
 	$ret = json_decode($response[0], true);
+
+	logModuleCall('WHMCS_Multisite Server', 'UnsuspendAccount', $post_fields, $response, $ret, array() );
 
 	if (empty($ret)) {
 		if(! empty($response[2])) return $response[2];
@@ -416,6 +424,8 @@ function whmcs_multisite_ChangePassword($params) {
 	$response = get_url($url, $post_fields);
 
 	$ret = json_decode($response[0], true);
+
+	logModuleCall('WHMCS_Multisite Server', 'ChangePassword', $post_fields, $response, $ret, array() );
 
 	if (empty($ret)) {
 		if(! empty($response[2])) return $response[2];
@@ -599,4 +609,3 @@ update_query("mod_customtable",array(
 }
 
 */
-?>
