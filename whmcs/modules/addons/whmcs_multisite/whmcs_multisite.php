@@ -8,7 +8,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.4
+Version: 1.0.5
 Network: true
 WDP ID: 264
 */

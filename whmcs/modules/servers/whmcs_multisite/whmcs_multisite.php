@@ -8,7 +8,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.4
+Version: 1.0.5
 Network: true
 WDP ID: 264
 */
@@ -473,9 +473,10 @@ return $code;
 
 function whmcs_multisite_AdminLink($params) {
 
-	$code = '<form action="http://'.$params["serverhostname"].'/wp-admin/" method="post" target="wpadmin">
+	$code = '<form action="http://'.$params["serverhostname"].'/wp-login.php" method="post" target="wpadmin">
 	<input type="hidden" name="log" value="'.$params["serverusername"].'" />
 	<input type="hidden" name="pwd" value="'.$params["serverpassword"].'" />
+	<input type="hidden" name="redirect_to" value="http://' . $params["serverhostname"] . '/wp-admin/" />
 	<input type="submit" value="Login to Wordpress" />
 	</form>';
 	return $code;
@@ -497,7 +498,7 @@ function whmcs_multisite_LoginLink($params) {
 			').attr('readonly','readonly');
 		});
 	</script>
-	<a href="http://<?php echo $params["serverhostname"]; ?>/wp-admin/?log=<?php echo $params["username"] .'&pwd=' . $params['serverpassword']; ?>" target="wpadmin" style="color:#cc0000">Login to Wordpress</a>
+	<a href="http://<?php echo $params["serverhostname"]; ?>/wp-login.php?log=<?php echo $params["username"] .'&pwd=' . $params['serverpassword']; ?>" target="wpadmin" style="color:#cc0000">Login to Wordpress</a>
 
 	<?php
 }

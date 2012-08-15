@@ -3,6 +3,9 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.0.5 =
+* Fixed problem doing automatic login from WHMCS server button
+
 = 1.0.4 =
 * Added Provision Server module logging to support debugging the WHMCS side.
 
