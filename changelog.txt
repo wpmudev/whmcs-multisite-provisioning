@@ -3,6 +3,12 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.0.7 = 
+* Fixed problem with duplicate user login names.
+
+= 1.0.6=
+* Username not being split from the email address correctly
+
 = 1.0.5 =
 * Fixed problem doing automatic login from WHMCS server button
 

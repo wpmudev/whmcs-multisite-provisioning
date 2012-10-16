@@ -7,7 +7,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.5
+Version: 1.0.7
 Network: true
 WDP ID: 264
 */
@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if ( !is_multisite() )
 exit( __('The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite.', 'mrp') );
 
-define('MRP_VERSION','1.0.5');
+define('MRP_VERSION','1.0.7');
 
 $whmcs_multisite_provisioning = new WHMCS_Multisite_Provisioning();
 
@@ -265,11 +265,11 @@ class WHMCS_Multisite_Provisioning{
 		if($user_id){
 			$user_name = get_userdata($user_id)->user_login; // Can't change name so pass back to update WHMCS
 		} else{
-			$user_name = (empty($this->whmcs['user_name'])) ? $email : sanitize_user($this->whmcs['user_name'], true);
+			$user_name = (empty($this->whmcs['user_name'])) ? sanitize_user( strstr($email, '@', true) ) : sanitize_user($this->whmcs['user_name'], true);
 			$ndx = 1;
 			$un = $user_name;
-			while(get_user_by('login', $user_name)){
-				$username = $un . $ndx++; //Avoid name collision
+			while($user = get_user_by('login', $user_name)){
+				$user_name = $un . $ndx++; //Avoid name collision
 			}
 		}
 		$this->response['user_name'] = $user_name; //Send back to WHMCS
