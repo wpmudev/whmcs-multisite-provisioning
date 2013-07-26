@@ -2,73 +2,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WHMCS Multisite Provisioning\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-20 10:10-0500\n"
-"PO-Revision-Date: 2012-03-20 10:10-0500\n"
-"Last-Translator: Arnold Bailey <abaileytn@gmail.com>\n"
+"POT-Creation-Date: 2013-07-26 11:38-0500\n"
+"PO-Revision-Date: 2013-07-26 11:38-0500\n"
+"Last-Translator: Arnold Bailey <arnold@incsub.com>\n"
 "Language-Team: Arnold Bailey <arnold@incsub.com>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-SearchPath-0: D:\\wamp\\www\\wpmu\\wp-content\\plugins\\whmcs-multisite-provisioning\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: ..\n"
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:32
-msgid "The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite."
+#: ../whmcs-mrp.php:32
+msgid ""
+"The WHMCS Multisite Provisioning plugin is only compatible with WordPress "
+"Multisite."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:141
+#: ../whmcs-mrp.php:141
 msgid "WHMCS Provisioning"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:182
+#: ../whmcs-mrp.php:182
 msgid "This request was not from an authorized site:"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:185
+#: ../whmcs-mrp.php:185
 msgid "You do not have permission to access this function."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:187
+#: ../whmcs-mrp.php:187
 msgid "You can't create an empty site."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:210
+#: ../whmcs-mrp.php:210
 msgid "No valid action request."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:239
+#: ../whmcs-mrp.php:238
 msgid "Is not a valid domain name, alphanumeric and \"-\" only"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:247
+#: ../whmcs-mrp.php:246
 #, php-format
-msgid "The following words are reserved for use by WordPress functions and cannot be used as blog names: <code>%s</code>"
+msgid ""
+"The following words are reserved for use by WordPress functions and cannot "
+"be used as blog names: <code>%s</code>"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:258
+#: ../whmcs-mrp.php:257
 msgid "Mapped domain already exists for "
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:286
+#: ../whmcs-mrp.php:285
 msgid "Missing or invalid site address."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:290
+#: ../whmcs-mrp.php:289
 msgid "Missing email address."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:295
+#: ../whmcs-mrp.php:294
 msgid "Invalid email address."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:344
+#: ../whmcs-mrp.php:345
 msgid "There was an error creating the user."
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:407
+#: ../whmcs-mrp.php:408
 #, php-format
 msgid ""
 "New site created by %1s\n"
@@ -77,54 +82,65 @@ msgid ""
 "Name: %3s"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:408
+#: ../whmcs-mrp.php:409
 #, php-format
 msgid "[%s] New Site Created"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:451
+#: ../whmcs-mrp.php:454
 msgid "domain not found when trying to suspend"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:457
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:486
+#: ../whmcs-mrp.php:460 ../whmcs-mrp.php:489
 msgid "has previously been terminated"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:480
+#: ../whmcs-mrp.php:483
 msgid "domain not found when trying to unsuspend"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:511
+#: ../whmcs-mrp.php:514
 msgid "domain not found when trying to terminate"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:560
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:566
+#: ../whmcs-mrp.php:563 ../whmcs-mrp.php:569
 msgid "WHMCS Multisite Provisioning"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:572
+#: ../whmcs-mrp.php:575
 msgid "Remote WHMCS host:"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:577
+#: ../whmcs-mrp.php:580
 msgid "Authentication Token:"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:583
+#: ../whmcs-mrp.php:586
 msgid "Authorized IP Addresses:"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:584
+#: ../whmcs-mrp.php:587
 msgid "(one per line)"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:585
+#: ../whmcs-mrp.php:588
 msgid "Leave blank to disable IP filtering"
 msgstr ""
 
-#: D:\wamp\www\wpmu\wp-content\plugins\whmcs-multisite-provisioning/whmcs-mrp.php:607
-msgid "Please install the latest version of <a href=\"http://premium.wpmudev.org/project/update-notifications/\" title=\"Download Now &raquo;\">our free Update Notifications plugin</a> which helps you stay up-to-date with the most stable, secure versions of WPMU DEV themes and plugins. <a href=\"http://premium.wpmudev.org/wpmu-dev/update-notifications-plugin-information/\">More information &raquo;</a>"
+#: ../wpmudev-dash-notification.php:57
+#, php-format
+msgid ""
+"Easily get updates, support, and one-click WPMU DEV plugin/theme "
+"installations right from in your dashboard - <strong><a href=\"%s\" title="
+"\"Install Now &raquo;\">install the free WPMU DEV Dashboard plugin</a></"
+"strong>. &nbsp;&nbsp;&nbsp;<small><a href=\"http://premium.wpmudev.org/wpmu-"
+"dev/update-notifications-plugin-information/\">(find out more)</a></small>"
 msgstr ""
 
+#: ../wpmudev-dash-notification.php:61
+#, php-format
+msgid ""
+"Updates, Support, Premium Plugins, Community - <strong><a href=\"%s\" title="
+"\"Activate Now &raquo;\">activate the WPMU DEV Dashboard plugin now</a></"
+"strong>."
+msgstr ""

@@ -73,7 +73,7 @@ Create a Product
 17. Second custom field must be named "Title", as a Textbox Validation "|^([a-zA-Z0-9- ])+$|i" (without quotes), Required field, Show on Order Form.
 18. Rest of the Product fields are Admin's choice.
 
-== If your Wordpress Install Offers Domain Mapping as well as subdomain/subdirectroy installs ==
+== If your Wordpress Install Offers Domain Mapping as well as subdomain/subdirectory installs ==
 Create a Product =
 1. Create a Product Group to Hold the new products
 2. In WHMCS admin go to Setup | Product/Services and Add New Product

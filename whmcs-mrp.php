@@ -7,7 +7,7 @@ Author: Arnold Bailey {Incsub)
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.7
+Version: 1.0.8
 Network: true
 WDP ID: 264
 */
@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if ( !is_multisite() )
 exit( __('The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite.', 'mrp') );
 
-define('MRP_VERSION','1.0.7');
+define('MRP_VERSION','1.0.8');
 
 $whmcs_multisite_provisioning = new WHMCS_Multisite_Provisioning();
 
@@ -276,7 +276,7 @@ class WHMCS_Multisite_Provisioning{
 
 		$password = $this->whmcs['password'];
 
-		$title = $this->whmcs['title'];
+		$title = (empty($this->whmcs['title']) ) ? '' : $this->whmcs['title'];
 
 		$credentials = $this->whmcs['credentials'];
 
@@ -296,6 +296,7 @@ class WHMCS_Multisite_Provisioning{
 		}
 
 		if ( is_subdomain_install() ) {
+			//Subdomain Install
 			$this->response['install_type'] = 'subdomain';
 			$newdomain = $domain . '.' . preg_replace( '|^www\.|', '', $current_site->domain );
 			$path = $base;
@@ -305,29 +306,30 @@ class WHMCS_Multisite_Provisioning{
 			$nd = $newdomain; //Remember the originl $newdomain
 			$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			while(! empty($blog_details)){
-				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
-				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found owner of this blog
-					break;
-				}
+//				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
+//				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found owner of this blog
+//					break;
+//				}
 				$newdomain = str_replace($domain, $domain . $ndx++, $nd);
 				$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			}
 		} else {
+			//Subdirectory Install
 			$this->response['install_type'] = 'subdirectory';
 			$newdomain = $current_site->domain;
-			$path = $base . $domain . '/';
+			$path = trailingslashit($base) . trailingslashit($domain);
 
 			//Check for duplicate
 			$ndx= 1;
 			$p = $path; // remember original path
 			$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			while(! empty($blog_details)){  //Already there
-				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
-				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found an owner of this blog
-
-					break;
-				}
-				$path = str_replace($domain, $domain . $ndx++, $p);
+//				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
+//				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found an owner of this blog
+//
+//					break;
+//				}
+				$path = str_replace(trim($path,'/'), trim($path,'/') . $ndx++, $p);
 				$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			}
 		}
@@ -549,7 +551,7 @@ class WHMCS_Multisite_Provisioning{
 	*/
 	function admin_settings_page(){
 
-		if(wp_verify_nonce($_POST['mrp_wpnonce'],'mrp_admin')){
+		if(! empty($_POST['mrp_wpnonce']) && wp_verify_nonce($_POST['mrp_wpnonce'],'mrp_admin')){
 			$settings = $_POST['mrp'];
 			update_site_option('mrp_settings', $settings);
 			echo '<div class="updated fade"><p>Settings Updated</p></div>';
