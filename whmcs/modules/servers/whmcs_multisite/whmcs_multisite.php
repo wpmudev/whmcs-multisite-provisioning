@@ -4,19 +4,36 @@ WHMCS Multisite Provisioning Server Module
 Plugin Name: WHMCS Multisite Provisioning
 Plugin URI: http://premium.wpmudev.org/project/whmcs-multisite-provisioning/
 Description: This plugin allows remote control of Multisite provisioning from WHMCS. Includes provisioning for Subdomain, Subdirectory or Domain Mapping Wordpress Multisite installs.
-Author: Arnold Bailey {Incsub)
+Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.8
+Version: 1.0.9
 Network: true
 WDP ID: 264
+*/
+/*  Copyright 2012  Incsub  (http://incsub.com)
+
+Author - Arnold Bailey
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 
 function whmcs_multisite_ConfigOptions() {
 
-	if( !defined('WPMU_WHMCS_SERVER_VERSION ') ) define('WPMU_WHMCS_SERVER_VERSION', '1.0.8');
+	if( !defined('WPMU_WHMCS_SERVER_VERSION ') ) define('WPMU_WHMCS_SERVER_VERSION', '1.0.9');
 
 	# Should return an array of the module options for each product - maximum of 24
 
@@ -141,9 +158,9 @@ function whmcs_multisite_CreateAccount($params) {
 	// Default Wordpress user name everything before the @ in their whmcs email
 	$wp_user_name = explode('@',$clientsdetails['email']);
 	$wp_user_name = $wp_user_name[0];
-	
+
 	$api_admin = $params["configoption7"];
-	
+
 	if (empty($api_admin)) return 'Product does not have an authorizing administrator defined. Please update the product module setting.';
 
 	$request = array();
@@ -501,7 +518,7 @@ function whmcs_multisite_LoginLink($params) {
 			').attr('readonly','readonly');
 		});
 	</script>
-	<a href="http://<?php echo $params["serverhostname"]; ?>/wp-login.php?log=<?php echo $params["username"] .'&pwd=' . $params['serverpassword']; ?>" target="wpadmin" style="color:#cc0000">Login to Wordpress</a>
+	<a href="http://<?php echo $params["serverhostname"]; ?>/wp-login.php?log=<?php echo $params["serverusername"] .'&pwd=' . $params['serverpassword']; ?>" target="wpadmin" style="color:#cc0000">Login to Wordpress</a>
 
 	<?php
 }

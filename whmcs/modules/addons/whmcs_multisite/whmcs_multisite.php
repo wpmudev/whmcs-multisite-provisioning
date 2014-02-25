@@ -4,13 +4,31 @@ WHMCS Multisite Provisioning Addon Module
 Plugin Name: WHMCS Multisite Remote Provisioning
 Plugin URI: http://premium.wpmudev.org/project/whmcs-multisite-provisioning/
 Description: This plugin allows remote control of Multisite provisioning from WHMCS. Includes provisioning for Subdomain, Subdirectory or Domain Mapping Wordpress Multisite installs.
-Author: Arnold Bailey {Incsub)
+Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.8
+Version: 1.0.9
 Network: true
 WDP ID: 264
+*/
+
+/*  Copyright 2012  Incsub  (http://incsub.com)
+
+Author - Arnold Bailey
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, version 2, as
+published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 if (!defined("WHMCS"))
@@ -19,7 +37,7 @@ die("This file cannot be accessed directly");
 function whmcs_multisite_config() {
 	$configarray = array(
 	"name" => "WHMCS Multisite Provisioning",
-	"version" => "1.0.8",
+	"version" => "1.0.9",
 	"author" => "wpmudev.org",
 	"language" => "english",
 

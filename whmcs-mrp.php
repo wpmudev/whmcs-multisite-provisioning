@@ -3,16 +3,18 @@
 Plugin Name: WHMCS Multisite Provisioning
 Plugin URI: http://premium.wpmudev.org/project/whmcs-multisite-provisioning/
 Description: This plugin allows remote control of Multisite provisioning from WHMCS. Includes provisioning for Subdomain, Subdirectory or Domain Mapping Wordpress Multisite installs.
-Author: Arnold Bailey {Incsub)
+Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.8
+Version: 1.0.9
 Network: true
 WDP ID: 264
 */
 
 /*  Copyright 2012  Incsub  (http://incsub.com)
+
+Author - Arnold Bailey
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -31,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if ( !is_multisite() )
 exit( __('The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite.', 'mrp') );
 
-define('MRP_VERSION','1.0.8');
+define('MRP_VERSION','1.0.9');
 
 $whmcs_multisite_provisioning = new WHMCS_Multisite_Provisioning();
 
@@ -252,7 +254,11 @@ class WHMCS_Multisite_Provisioning{
 
 		//Is there already a domain with this mapping?
 		if($this->domain_mapping_active){
-			if( null != $this->db->get_row( $this->db->prepare("SELECT blog_id FROM {$this->db->blogs} WHERE domain = %s AND path = '/' /* domain mapping */", $mapped_domain) )
+			if(
+			//Check blogs table
+			null != $this->db->get_row( $this->db->prepare("SELECT blog_id FROM {$this->db->blogs} WHERE domain = %s AND path = '/' /* domain mapping */", $mapped_domain) )
+
+			//Check mapped table
 			|| null != $this->db->get_row( $this->db->prepare("SELECT blog_id FROM {$this->dmt} WHERE domain = %s /* domain mapping */", $mapped_domain ) ) ) {
 				$this->response['error'] = __("Mapped domain already exists for ",'mrp') . $mapped_domain;
 				return;
@@ -600,5 +606,13 @@ class WHMCS_Multisite_Provisioning{
 		<?php
 	}
 }
+
+/* -------------------- WPMU DEV Dashboard Notice -------------------- */
+global $wpmudev_notices;
+$wpmudev_notices[] = array( 'id'=> 264,
+'name'=> 'WHMCS Multisite Provisioning',
+'screens' => array(
+'toplevel_page_mrp-settings-network',
+) );
 
 include_once 'wpmudev-dash-notification.php';

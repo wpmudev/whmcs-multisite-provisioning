@@ -3,12 +3,16 @@ Author: Arnold Bailey
 
 == Change Log ==
 
-= 1.0.8 = 
+
+= 1.0.9 =
+* Changed the client WordPress login link to be the Admin login.
+
+= 1.0.8 =
 * Fixed problem were global $base is sometimes returned as null
 * Fixed problem with site name setting if the custom field title is used
 * Fixed subdirectory installs so properly add count on duplicating an existing site.
 
-= 1.0.7 = 
+= 1.0.7 =
 * Fixed problem with duplicate user login names.
 
 = 1.0.6=

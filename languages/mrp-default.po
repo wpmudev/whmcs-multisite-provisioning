@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WHMCS Multisite Provisioning\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-26 11:38-0500\n"
-"PO-Revision-Date: 2013-07-26 11:38-0500\n"
+"POT-Creation-Date: 2014-02-24 20:38-0500\n"
+"PO-Revision-Date: 2014-02-24 20:39-0500\n"
 "Last-Translator: Arnold Bailey <arnold@incsub.com>\n"
 "Language-Team: Arnold Bailey <arnold@incsub.com>\n"
 "Language: en\n"
@@ -13,67 +13,67 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../whmcs-mrp.php:32
+#: ../whmcs-mrp.php:34
 msgid ""
 "The WHMCS Multisite Provisioning plugin is only compatible with WordPress "
 "Multisite."
 msgstr ""
 
-#: ../whmcs-mrp.php:141
+#: ../whmcs-mrp.php:143
 msgid "WHMCS Provisioning"
 msgstr ""
 
-#: ../whmcs-mrp.php:182
+#: ../whmcs-mrp.php:184
 msgid "This request was not from an authorized site:"
 msgstr ""
 
-#: ../whmcs-mrp.php:185
+#: ../whmcs-mrp.php:187
 msgid "You do not have permission to access this function."
 msgstr ""
 
-#: ../whmcs-mrp.php:187
+#: ../whmcs-mrp.php:189
 msgid "You can't create an empty site."
 msgstr ""
 
-#: ../whmcs-mrp.php:210
+#: ../whmcs-mrp.php:212
 msgid "No valid action request."
 msgstr ""
 
-#: ../whmcs-mrp.php:238
+#: ../whmcs-mrp.php:240
 msgid "Is not a valid domain name, alphanumeric and \"-\" only"
 msgstr ""
 
-#: ../whmcs-mrp.php:246
+#: ../whmcs-mrp.php:248
 #, php-format
 msgid ""
 "The following words are reserved for use by WordPress functions and cannot "
 "be used as blog names: <code>%s</code>"
 msgstr ""
 
-#: ../whmcs-mrp.php:257
+#: ../whmcs-mrp.php:263
 msgid "Mapped domain already exists for "
 msgstr ""
 
-#: ../whmcs-mrp.php:285
+#: ../whmcs-mrp.php:291
 msgid "Missing or invalid site address."
 msgstr ""
 
-#: ../whmcs-mrp.php:289
+#: ../whmcs-mrp.php:295
 msgid "Missing email address."
 msgstr ""
 
-#: ../whmcs-mrp.php:294
+#: ../whmcs-mrp.php:300
 msgid "Invalid email address."
 msgstr ""
 
-#: ../whmcs-mrp.php:345
+#: ../whmcs-mrp.php:351
 msgid "There was an error creating the user."
 msgstr ""
 
-#: ../whmcs-mrp.php:408
+#: ../whmcs-mrp.php:414
 #, php-format
 msgid ""
 "New site created by %1s\n"
@@ -82,65 +82,47 @@ msgid ""
 "Name: %3s"
 msgstr ""
 
-#: ../whmcs-mrp.php:409
+#: ../whmcs-mrp.php:415
 #, php-format
 msgid "[%s] New Site Created"
 msgstr ""
 
-#: ../whmcs-mrp.php:454
+#: ../whmcs-mrp.php:460
 msgid "domain not found when trying to suspend"
 msgstr ""
 
-#: ../whmcs-mrp.php:460 ../whmcs-mrp.php:489
+#: ../whmcs-mrp.php:466 ../whmcs-mrp.php:495
 msgid "has previously been terminated"
 msgstr ""
 
-#: ../whmcs-mrp.php:483
+#: ../whmcs-mrp.php:489
 msgid "domain not found when trying to unsuspend"
 msgstr ""
 
-#: ../whmcs-mrp.php:514
+#: ../whmcs-mrp.php:520
 msgid "domain not found when trying to terminate"
 msgstr ""
 
-#: ../whmcs-mrp.php:563 ../whmcs-mrp.php:569
+#: ../whmcs-mrp.php:569 ../whmcs-mrp.php:575
 msgid "WHMCS Multisite Provisioning"
 msgstr ""
 
-#: ../whmcs-mrp.php:575
+#: ../whmcs-mrp.php:581
 msgid "Remote WHMCS host:"
 msgstr ""
 
-#: ../whmcs-mrp.php:580
+#: ../whmcs-mrp.php:586
 msgid "Authentication Token:"
 msgstr ""
 
-#: ../whmcs-mrp.php:586
+#: ../whmcs-mrp.php:592
 msgid "Authorized IP Addresses:"
 msgstr ""
 
-#: ../whmcs-mrp.php:587
+#: ../whmcs-mrp.php:593
 msgid "(one per line)"
 msgstr ""
 
-#: ../whmcs-mrp.php:588
+#: ../whmcs-mrp.php:594
 msgid "Leave blank to disable IP filtering"
-msgstr ""
-
-#: ../wpmudev-dash-notification.php:57
-#, php-format
-msgid ""
-"Easily get updates, support, and one-click WPMU DEV plugin/theme "
-"installations right from in your dashboard - <strong><a href=\"%s\" title="
-"\"Install Now &raquo;\">install the free WPMU DEV Dashboard plugin</a></"
-"strong>. &nbsp;&nbsp;&nbsp;<small><a href=\"http://premium.wpmudev.org/wpmu-"
-"dev/update-notifications-plugin-information/\">(find out more)</a></small>"
-msgstr ""
-
-#: ../wpmudev-dash-notification.php:61
-#, php-format
-msgid ""
-"Updates, Support, Premium Plugins, Community - <strong><a href=\"%s\" title="
-"\"Activate Now &raquo;\">activate the WPMU DEV Dashboard plugin now</a></"
-"strong>."
 msgstr ""
