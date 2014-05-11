@@ -3,6 +3,8 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.1 =
+* Added Pro_Sites support.
 
 = 1.0.9 =
 * Changed the client WordPress login link to be the Admin login.

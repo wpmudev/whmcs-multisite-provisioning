@@ -7,14 +7,14 @@ Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.9
+Version: 1.1
 Network: true
 WDP ID: 264
 */
 
 /*  Copyright 2012  Incsub  (http://incsub.com)
 
-Author - Arnold Bailey
+Authors - Arnold Bailey (Incsub), Studio Progressive
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -33,10 +33,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if ( !is_multisite() )
 exit( __('The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite.', 'mrp') );
 
-define('MRP_VERSION','1.0.9');
+define('MRP_VERSION','1.1');
 
 $whmcs_multisite_provisioning = new WHMCS_Multisite_Provisioning();
-
 
 class WHMCS_Multisite_Provisioning{
 
@@ -58,10 +57,8 @@ class WHMCS_Multisite_Provisioning{
 	// Domain Mapping table
 	public $dmt = '';
 
-	function WHMCS_Multisite_Provisioning(){$this->__construct();}
-
 	/**
-	*
+	* CONSTRUCTOR
 	*
 	*/
 	function __construct(){
@@ -110,6 +107,16 @@ class WHMCS_Multisite_Provisioning{
 	function on_activate(){
 		//Activation if needed.
 	}
+
+	/*
+	function set_extend($blog_id) {
+	//$trial_days = $this->get_setting('trial_days');
+	if ( $trial_days > 0 ) {
+	$extend = $trial_days * 86400;
+	$this->extend($blog_id, $extend, 'Trial', $this->get_setting('trial_level', 1));
+	}
+	}
+	*/
 
 	/**
 	* on-deactivate - called on deactivating the plugin. Performs any cleanup necessary
@@ -164,7 +171,7 @@ class WHMCS_Multisite_Provisioning{
 		// If no whmcs data then not for us
 		if(! array_key_exists('whmcs',$wp->query_vars)) return;
 
-		$this->whmcs = $_POST['whmcs'];
+		$this->whmcs = $_REQUEST['whmcs'];
 
 		$this->response = array(); //Values to be returned to whmcs'
 
@@ -190,10 +197,8 @@ class WHMCS_Multisite_Provisioning{
 		}else{
 			$this->process_request();
 		}
-
-		echo json_encode($this->response);
-
-		die(); //we handled it WP doesn't need to
+		echo(json_encode($this->response) );
+		exit;
 	}
 
 	/**
@@ -208,6 +213,7 @@ class WHMCS_Multisite_Provisioning{
 			case 'unsuspend' : $this->unsuspend_blog(); break;
 			case 'terminate' : $this->terminate_blog(); break;
 			case 'password' : $this->set_password(); break;
+			case 'changepackage' : $this->changepackage(); break;
 
 			default: $this->response['error'] = __('No valid action request.', 'mrp'); break;
 		}
@@ -312,10 +318,10 @@ class WHMCS_Multisite_Provisioning{
 			$nd = $newdomain; //Remember the originl $newdomain
 			$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			while(! empty($blog_details)){
-//				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
-//				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found owner of this blog
-//					break;
-//				}
+				//				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
+				//				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found owner of this blog
+				//					break;
+				//				}
 				$newdomain = str_replace($domain, $domain . $ndx++, $nd);
 				$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			}
@@ -330,11 +336,11 @@ class WHMCS_Multisite_Provisioning{
 			$p = $path; // remember original path
 			$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			while(! empty($blog_details)){  //Already there
-//				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
-//				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found an owner of this blog
-//
-//					break;
-//				}
+				//				$whmcs_settings = get_blog_option($blog_details->blog_id,'whmcs_settings');
+				//				if ( $whmcs_settings && $whmcs_settings['client_id'] == $credentials['whmcs_client_id']){	//Found an owner of this blog
+				//
+				//					break;
+				//				}
 				$path = str_replace(trim($path,'/'), trim($path,'/') . $ndx++, $p);
 				$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			}
@@ -435,8 +441,114 @@ class WHMCS_Multisite_Provisioning{
 			mkdir(WP_CONTENT_DIR.'/blogs.dir/'.$id . '/files', 0755, true); //0755 octal
 		}
 
+		$level = (empty($this->whmcs['level']) ) ? '1' : $this->whmcs['level'];
+
+		/**
+		* ProSites
+		*/
+		global $wpdb,$current_user,$current_site,$base, $psts;
+
+		if( !empty( $level ) ) { //Need to handle Pro-Sites?
+			//Is pro-sites installed?
+			if( empty($psts) ) {
+				$this->response['error'] = __( 'Requesting Pro-sites which is not active on this site.','mrp');
+				return;
+			}
+
+			$levels = array_map( 'strtolower', (array)get_site_option('psts_levels', array() ) );
+			if( empty($levels) ){
+				//No levels to search
+				$this->response['error'] = __( 'No Levels defined in Pro-Sites.','mrp');
+				return;
+			}
+
+			$level_id = 0;
+			foreach($levels as $key => $val) {
+				if( strtolower($val['name']) == strtolower($level) ) $level_id = intval($key);
+			}
+
+			if(empty($level_id) ) {
+				$this->response['error'] = __( 'Invalid Pro Sites Level name in create_blog.','mrp');
+				return;
+			}
+			$this->response['level'] = $level_id;
+
+			$ch_blog = $wpdb->get_row("SELECT blog_ID FROM " . $wpdb->base_prefix . "pro_sites WHERE blog_ID=$id LIMIT 1");
+			if(!empty($ch_blog->blog_ID)){
+				$wpdb->query($wpdb->prepare("UPDATE " . $wpdb->base_prefix . "pro_sites SET level=%d WHERE blog_ID=%s", $level_id, $id));
+				$psts->record_stat($id, 'upgrade');
+			} else {
+				$wpdb->query($wpdb->prepare("INSERT INTO " . $wpdb->base_prefix . "pro_sites (blog_ID, expire, level, gateway, term) VALUES (%d, '9999999999', %s, 'WHMCS', 'Permanent')", $id, $level_id));
+				$psts->record_stat($id, 'signup');
+			}
+			$psts->log_action($id, __("WHMCS created blog id {$id}. Expiration and payments will be handled by WHMCS", 'mrp') );
+
+		}
+		//print_r($this->db);
+		//exit();
 		//All done
 		$this->response['success'] = true;
+	}
+
+
+	///// Change LEVEL BLOG
+	/**
+	* changepackage - command to suspend a blog from WHMCS
+	* $this->whmcs contains (at least)
+	* ['action']
+	* ['domain']
+	* ['credentials']
+	* @since 1.1
+	*/
+	function changepackage(){
+		global $wpdb,$base, $psts;
+
+		$id = intval($this->whmcs['blog_id']);
+		$domain = $this->whmcs['domain'];
+		$details = get_blog_details($id);
+		$level = $this->whmcs['level'];
+
+		if( !empty( $level ) ) {
+
+			if( empty($psts) ) {
+				$this->response['error'] = __( 'Requesting Pro-sites which is not active on this site.','mrp');
+				return;
+			}
+
+			$levels = get_site_option('psts_levels', array() );
+			if(empty($levels) ) {
+				//No levels to search
+				$this->response['error'] = __( 'No Levels defined in Pro-Sites.','mrp');
+				return;
+			}
+
+			$level_id = 0;
+			foreach($levels as $key => $val) {
+				if( strtolower($val['name']) == strtolower($level) ) $level_id = intval($key);
+			}
+
+			if(empty($level_id) ) {
+				$this->response['error'] = __( 'Invalid Pro Sites Level name in changepackage.','mrp');
+				return;
+			}
+			$this->response['level'] = $level_id;
+
+			$ch_blog = $wpdb->get_row("SELECT blog_ID FROM " . $wpdb->base_prefix . "pro_sites WHERE blog_ID=$id LIMIT 1");
+			if(!empty($ch_blog->blog_ID)){
+				$update_level = $wpdb->query($wpdb->prepare("UPDATE " . $wpdb->base_prefix . "pro_sites SET level=%d WHERE blog_ID=%d", $level_id, $id));
+			} else {
+				$update_level = $wpdb->query($wpdb->prepare("INSERT INTO " . $wpdb->base_prefix . "pro_sites (blog_ID, expire, level, gateway, term) VALUES (%d, '9999999999', %d, 'WHMCS', 'Permanent')", $id, $level_id));
+			}
+
+			if( $update_level === false ){
+				$this->response['error'] = "$domain: $update_level" . __( "Error SQL Update Level Status $wpdb->last_error $wpdb->last_query",'mrp');
+				return;
+			}
+			$this->response['message'] = "success";
+			$psts->record_stat($id, 'upgrade');
+			$psts->log_action($id, __("WHMCS changed Pro-Sites level to {$levels[$level_id]['name']} (Level ID {$level_id}).", 'mrp') );
+		}
+
 	}
 
 	/**
@@ -447,6 +559,8 @@ class WHMCS_Multisite_Provisioning{
 	* ['credentials']
 	*/
 	function suspend_blog(){
+		global $psts;
+
 
 		$id = intval($this->whmcs['blog_id']);
 		$domain = $this->whmcs['domain'];
@@ -461,12 +575,9 @@ class WHMCS_Multisite_Provisioning{
 			return;
 		}
 
-		//Has blog already been terminated?
-		if ($details->deleted != 0){
-			$this->response['error'] = "$domain: " . __( 'has previously been terminated','mrp');
-			return;
-		}
-		update_blog_status( $id, 'archived', '1' );
+		if( !empty($psts) ) $psts->log_action($id, __("WHMCS SUSPENDED blog id {$id}.", 'mrp') );
+
+		update_blog_status( $id, 'deleted', '1' );
 	}
 
 	/**
@@ -478,6 +589,8 @@ class WHMCS_Multisite_Provisioning{
 	*
 	*/
 	function unsuspend_blog(){
+		global $psts;
+
 		$id = intval($this->whmcs['blog_id']);
 		$domain = $this->whmcs['domain'];
 
@@ -490,12 +603,9 @@ class WHMCS_Multisite_Provisioning{
 			return;
 		}
 
-		//Has blog already been terminated?
-		if ($details->deleted != 0){
-			$this->response['error'] = "$domain: " . __( 'has previously been terminated','mrp');
-			return;
-		}
-		update_blog_status( $id, 'archived', '0' );
+		if( !empty($psts) ) $psts->log_action($id, __("WHMCS UNSUSPENDED blog id {$id}.", 'mrp') );
+
+		update_blog_status( $id, 'deleted', '0' );
 	}
 
 	/**
@@ -508,6 +618,8 @@ class WHMCS_Multisite_Provisioning{
 	*
 	*/
 	function terminate_blog(){
+		global $psts;
+
 		$id = intval($this->whmcs['blog_id']);
 		$domain = $this->whmcs['domain'];
 
@@ -520,7 +632,10 @@ class WHMCS_Multisite_Provisioning{
 			$this->response['error'] = "$domain: " . __( 'domain not found when trying to terminate','mrp');
 			return;
 		}
-		update_blog_status( $id, 'deleted', '1' );
+
+		if( !empty($psts) ) $psts->log_action($id, __("WHMCS TERMINATED blog id {$id}.", 'mrp') );
+
+		wpmu_delete_blog( $id, true );
 	}
 
 	/**
@@ -563,7 +678,6 @@ class WHMCS_Multisite_Provisioning{
 			echo '<div class="updated fade"><p>Settings Updated</p></div>';
 		}
 		$settings = get_site_option('mrp_settings');
-
 		?>
 		<div class="wrap">
 			<h2><?php _e('WHMCS Multisite Provisioning','mrp'); echo " " . MRP_VERSION; ?></h2>

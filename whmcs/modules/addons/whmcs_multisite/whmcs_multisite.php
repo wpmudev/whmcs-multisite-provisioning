@@ -37,7 +37,7 @@ die("This file cannot be accessed directly");
 function whmcs_multisite_config() {
 	$configarray = array(
 	"name" => "WHMCS Multisite Provisioning",
-	"version" => "1.0.9",
+	"version" => "1.1",
 	"author" => "wpmudev.org",
 	"language" => "english",
 
@@ -63,9 +63,18 @@ function whmcs_multisite_activate() {
 	`service_id` INT  NOT NULL,
 	`domain` TEXT NOT NULL,
 	`path` TEXT NOT NULL,
+	`level` INT NOT NULL 0,
 	KEY `service_id` (`service_id`, `blog_id`)
 	)";
+
 	$result = mysql_query($query);
+	//Add level field for Pro-Sites
+	$col = mysql_query("SELECT `level` FROM `mod_whmcs_multisite`");
+
+	if( !$col ) {
+		$query = "ALTER TABLE `mod_whmcs_multisite` ADD `level` INT NULL";
+		mysql_query( $query ); exit;
+	}
 }
 
 function whmcs_multisite_deactivate() {
@@ -78,9 +87,9 @@ function whmcs_multisite_deactivate() {
 
 
 function whmcs_multisite_upgrade($vars) {
-	/*
 	$version = $vars['version'];
 
+	/*
 	# Run SQL Updates for V1.0 to V1.1
 	if ($version < 1.1) {
 	$query = "ALTER `mod_addonexample` ADD `demo2` TEXT NOT NULL ";
@@ -111,6 +120,7 @@ function whmcs_multisite_output($vars) {
 	<p>'.$LANG['documentation'].'</p>';
 	*/
 	echo "<p>Version: $version</p>";
+	echo "<p>With Pro-Sites support</p>";
 
 }
 

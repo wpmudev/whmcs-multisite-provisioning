@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WHMCS Multisite Provisioning\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-24 20:38-0500\n"
-"PO-Revision-Date: 2014-02-24 20:39-0500\n"
+"POT-Creation-Date: 2014-05-11 18:58-0500\n"
+"PO-Revision-Date: 2014-05-11 18:58-0500\n"
 "Last-Translator: Arnold Bailey <arnold@incsub.com>\n"
 "Language-Team: Arnold Bailey <arnold@incsub.com>\n"
 "Language: en\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 1.6.5\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 #: ../whmcs-mrp.php:34
@@ -22,58 +22,58 @@ msgid ""
 "Multisite."
 msgstr ""
 
-#: ../whmcs-mrp.php:143
+#: ../whmcs-mrp.php:150
 msgid "WHMCS Provisioning"
 msgstr ""
 
-#: ../whmcs-mrp.php:184
+#: ../whmcs-mrp.php:191
 msgid "This request was not from an authorized site:"
 msgstr ""
 
-#: ../whmcs-mrp.php:187
+#: ../whmcs-mrp.php:194
 msgid "You do not have permission to access this function."
 msgstr ""
 
-#: ../whmcs-mrp.php:189
+#: ../whmcs-mrp.php:196
 msgid "You can't create an empty site."
 msgstr ""
 
-#: ../whmcs-mrp.php:212
+#: ../whmcs-mrp.php:218
 msgid "No valid action request."
 msgstr ""
 
-#: ../whmcs-mrp.php:240
+#: ../whmcs-mrp.php:246
 msgid "Is not a valid domain name, alphanumeric and \"-\" only"
 msgstr ""
 
-#: ../whmcs-mrp.php:248
+#: ../whmcs-mrp.php:254
 #, php-format
 msgid ""
 "The following words are reserved for use by WordPress functions and cannot "
 "be used as blog names: <code>%s</code>"
 msgstr ""
 
-#: ../whmcs-mrp.php:263
+#: ../whmcs-mrp.php:269
 msgid "Mapped domain already exists for "
 msgstr ""
 
-#: ../whmcs-mrp.php:291
+#: ../whmcs-mrp.php:297
 msgid "Missing or invalid site address."
 msgstr ""
 
-#: ../whmcs-mrp.php:295
+#: ../whmcs-mrp.php:301
 msgid "Missing email address."
 msgstr ""
 
-#: ../whmcs-mrp.php:300
+#: ../whmcs-mrp.php:306
 msgid "Invalid email address."
 msgstr ""
 
-#: ../whmcs-mrp.php:351
+#: ../whmcs-mrp.php:357
 msgid "There was an error creating the user."
 msgstr ""
 
-#: ../whmcs-mrp.php:414
+#: ../whmcs-mrp.php:420
 #, php-format
 msgid ""
 "New site created by %1s\n"
@@ -82,47 +82,59 @@ msgid ""
 "Name: %3s"
 msgstr ""
 
-#: ../whmcs-mrp.php:415
+#: ../whmcs-mrp.php:421
 #, php-format
 msgid "[%s] New Site Created"
 msgstr ""
 
-#: ../whmcs-mrp.php:460
+#: ../whmcs-mrp.php:454 ../whmcs-mrp.php:514
+msgid "Requesting Pro-sites which is not active on this site."
+msgstr ""
+
+#: ../whmcs-mrp.php:461 ../whmcs-mrp.php:521
+msgid "No Levels defined in Pro-Sites."
+msgstr ""
+
+#: ../whmcs-mrp.php:471
+msgid "Invalid Pro Sites Level name in create_blog."
+msgstr ""
+
+#: ../whmcs-mrp.php:531
+msgid "Invalid Pro Sites Level name in changepackage."
+msgstr ""
+
+#: ../whmcs-mrp.php:574
 msgid "domain not found when trying to suspend"
 msgstr ""
 
-#: ../whmcs-mrp.php:466 ../whmcs-mrp.php:495
-msgid "has previously been terminated"
-msgstr ""
-
-#: ../whmcs-mrp.php:489
+#: ../whmcs-mrp.php:602
 msgid "domain not found when trying to unsuspend"
 msgstr ""
 
-#: ../whmcs-mrp.php:520
+#: ../whmcs-mrp.php:632
 msgid "domain not found when trying to terminate"
 msgstr ""
 
-#: ../whmcs-mrp.php:569 ../whmcs-mrp.php:575
+#: ../whmcs-mrp.php:683 ../whmcs-mrp.php:689
 msgid "WHMCS Multisite Provisioning"
 msgstr ""
 
-#: ../whmcs-mrp.php:581
+#: ../whmcs-mrp.php:695
 msgid "Remote WHMCS host:"
 msgstr ""
 
-#: ../whmcs-mrp.php:586
+#: ../whmcs-mrp.php:700
 msgid "Authentication Token:"
 msgstr ""
 
-#: ../whmcs-mrp.php:592
+#: ../whmcs-mrp.php:706
 msgid "Authorized IP Addresses:"
 msgstr ""
 
-#: ../whmcs-mrp.php:593
+#: ../whmcs-mrp.php:707
 msgid "(one per line)"
 msgstr ""
 
-#: ../whmcs-mrp.php:594
+#: ../whmcs-mrp.php:708
 msgid "Leave blank to disable IP filtering"
 msgstr ""

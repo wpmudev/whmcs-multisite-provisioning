@@ -8,7 +8,7 @@ Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.0.9
+Version: 1.1
 Network: true
 WDP ID: 264
 */
@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 function whmcs_multisite_ConfigOptions() {
 
-	if( !defined('WPMU_WHMCS_SERVER_VERSION ') ) define('WPMU_WHMCS_SERVER_VERSION', '1.0.9');
+	if( !defined('WPMU_WHMCS_SERVER_VERSION ') ) define('WPMU_WHMCS_SERVER_VERSION', '1.1');
 
 	# Should return an array of the module options for each product - maximum of 24
 
@@ -45,6 +45,7 @@ function whmcs_multisite_ConfigOptions() {
 	"Default Role" => array( "Type" => "text", "Size" => "25", "Description" => "<br />This is the role that will be assigned to a user created by this product." ),
 	"Web Space Quota" => array( "Type" => "text", "Size" => "5", "Description" => "MB <br />Allowed upload space or leave blank to use Wordpress defaults." ),
 	"Product Administrator" => array( "Type" => "text", "Size" => "25", "Description" => "<br />The WHMCS Administrator authorizing this product.<br />REQUIRED for the API to function" ),
+	"ProSites" => array( "Type" => "text", "Size" => "25", "Description" => "<br />ProSite Plan Name" ),
 	//"Subdomains" => array( "Type" => "dropdown", "Options" => "1,2,5,10,25,50,Unlimited"),
 	);
 
@@ -153,6 +154,7 @@ function whmcs_multisite_CreateAccount($params) {
 	'whmcs_client_id' => $clientsdetails['userid'],
 	'whmcs_service_id' => $params['serviceid'],
 	'whmcs_product_id' => $params['pid'],
+	'level' => $params['configoption8'],
 	);
 
 	// Default Wordpress user name everything before the @ in their whmcs email
@@ -180,7 +182,7 @@ function whmcs_multisite_CreateAccount($params) {
 		else $request['domain'] = $params['configoption2'];
 	}
 
-	$request['title'] = ($params['configoption3'] == 'on') ? $customfields['Title'] : $params['configoption1'];
+	$request['title'] = ($params['configoption3'] == 'on' and !empty($customfields['Title'])) ? $customfields['Title'] : $params['configoption1'];
 
 	$request['user_name'] = (empty($username)) ? $wp_user_name : $username;
 
@@ -191,6 +193,7 @@ function whmcs_multisite_CreateAccount($params) {
 	$request['first_name'] = $clientsdetails['firstname'];
 	$request['default_role'] = $params['configoption5'];
 	$request['upload_space'] = $params['configoption6'];
+	$request['level'] = $params['configoption8'];
 	$request['credentials'] = $credentials;
 
 	$whmcs = array('whmcs' => $request);
@@ -225,7 +228,8 @@ function whmcs_multisite_CreateAccount($params) {
 		'blog_id' => intval($ret['blog_id']),
 		'service_id' => intval($params["serviceid"]),
 		'domain' => $ret['domain'],
-		'path' => $ret['path']
+		'path' => $ret['path'],
+		'level' => empty( $ret['level'] ) ? 0 : intval( $ret['level'] ),
 		));
 
 		//Save to service record
@@ -350,7 +354,44 @@ function whmcs_multisite_SuspendAccount($params) {
 		$result = 'success';
 	}
 	return $result;
+}
 
+function whmcs_multisite_ChangePackage($params) {
+
+	$credentials = array(
+	'user_login' => $params['serverusername'],
+	'user_password' => $params['serverpassword'],
+	'remember' => 0,
+	'whmcs_client_id' => $clientsdetails['userid'],
+	'whmcs_service_id' => $params['serviceid'],
+	'whmcs_product_id' => $params['pid'],
+	);
+
+	$service_id = $params['serviceid'];
+	$data = get_blog_data($params['serviceid']);
+	$request = array();
+	$request['action'] = 'changepackage';
+	$request['blog_id'] = $data['blog_id'];
+	$request['domain'] = $data['domain'];
+	$request['credentials'] = $credentials;
+	$request['level'] = $params['configoption8'];
+	$whmcs = array('whmcs' => $request);
+	$post_fields =  http_build_query($whmcs);
+	$url = (empty($params['serversecure'])) ? 'http://' : 'https://';
+	$url .= $params['serverhostname'];
+	$response = get_url($url, $post_fields);
+	$ret = json_decode($response[0], true);
+
+	logModuleCall('WHMCS_Multisite Server '.WPMU_WHMCS_SERVER_VERSION, 'ChangePackage', $post_fields, $response, $ret, array() );
+
+	if (is_array($ret) && isset($ret['error'])) {
+		$result = $ret['error'] . ":" . $ret['message'];
+	} else {
+		$level = empty( $ret['level'] ) ? 0 : intval( $ret['level'] );
+		update_query('mod_whmcs_multisite', array('level' => $level ), array( 'service_id' => $service_id ) );
+		$result = 'success';
+	}
+	return $result;
 }
 
 function whmcs_multisite_UnsuspendAccount($params) {
@@ -460,36 +501,6 @@ function whmcs_multisite_ChangePassword($params) {
 	return $result;
 
 }
-
-/*
-function whmcs_multisite_ChangePackage($params) {
-
-# Code to perform action goes here...
-
-if ($successful) {
-$result = "success";
-} else {
-$result = "Error Message Goes Here...";
-}
-return $result;
-
-}
-
-function whmcs_multisite_ClientArea($params) {
-
-# Output can be returned like this, or defined via a clientarea.tpl template file (see docs for more info)
-
-$code = '<h1>Client Area</h1>
-<form action="http://'.$serverip.'/controlpanel" method="post" target="_blank">
-<input type="hidden" name="user" value="'.$params["username"].'" />
-<input type="hidden" name="pass" value="'.$params["password"].'" />
-<input type="submit" value="Login to Control Panel" />
-<input type="button" value="Login to Webmail" onClick="window.open(\'http://'.$serverip.'/webmail\')" />
-</form>';
-return $code;
-
-}
-*/
 
 function whmcs_multisite_AdminLink($params) {
 
@@ -607,14 +618,16 @@ update_query("tblhosting",array(
 
 function whmcs_multisite_AdminServicesTabFields($params) {
 
-	$result = select_query("mod_whmcs_multisite","",array("service_id" => $params['serviceid']));
+	$result = select_query("mod_whmcs_multisite","*",array("service_id" => $params['serviceid']));
 	$data = mysql_fetch_array($result);
 	$domain = $data['domain'];
 	$path = $data['path'];
+	$level = $data['level'];
 
 	$fieldsarray = array(
 	'Subdomain/Subdirectory' => $domain,
 	'Path' => $path,
+	'Pro-Sites Level' => $level,
 	);
 	return $fieldsarray;
 
