@@ -3,6 +3,13 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.1.0.1 =
+* Added an ob_end_clean around the the plugin code to make sure that Debug messages 
+  from Wordpress and other plugins don't get passed back in the WHMCS response, destroying the json structure,
+* Added debug setting checkbox which turns off blocking the debug messages sent back to WHMCS.
+  They can then appear in the WHMCS Modules Log.
+* No longer assign level 1 if Pro-Sites field is empty.
+
 = 1.1 =
 * Added Pro_Sites support.
 
