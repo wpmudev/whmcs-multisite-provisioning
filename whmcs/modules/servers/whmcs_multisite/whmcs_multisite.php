@@ -8,7 +8,7 @@ Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.1
+Version: 1.1.0.2
 Network: true
 WDP ID: 264
 */

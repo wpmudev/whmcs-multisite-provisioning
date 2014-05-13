@@ -37,7 +37,7 @@ die("This file cannot be accessed directly");
 function whmcs_multisite_config() {
 	$configarray = array(
 	"name" => "WHMCS Multisite Provisioning",
-	"version" => "1.1",
+	"version" => "1.1.0.2",
 	"author" => "wpmudev.org",
 	"language" => "english",
 
@@ -63,7 +63,7 @@ function whmcs_multisite_activate() {
 	`service_id` INT  NOT NULL,
 	`domain` TEXT NOT NULL,
 	`path` TEXT NOT NULL,
-	`level` INT NOT NULL 0,
+	`level` INT NOT NULL,
 	KEY `service_id` (`service_id`, `blog_id`)
 	)";
 

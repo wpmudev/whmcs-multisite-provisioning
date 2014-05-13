@@ -3,6 +3,9 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.1.0.2 =
+* Fixed problem in add on module creating table.
+
 = 1.1.0.1 =
 * Added an ob_end_clean around the the plugin code to make sure that Debug messages 
   from Wordpress and other plugins don't get passed back in the WHMCS response, destroying the json structure,
