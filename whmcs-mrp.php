@@ -7,7 +7,7 @@ Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.1.0.2
+Version: 1.1.0.3
 Network: true
 WDP ID: 264
 */
@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if ( !is_multisite() )
 exit( __('The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite.', 'mrp') );
 
-define('MRP_VERSION','1.1.0.2');
+define('MRP_VERSION','1.1.0.3');
 
 $whmcs_multisite_provisioning = new WHMCS_Multisite_Provisioning();
 
@@ -249,6 +249,12 @@ class WHMCS_Multisite_Provisioning{
 		global $wpdb,$current_user,$current_site,$base;
 
 		$domain = strtolower($this->whmcs['domain']);
+		$mapped_domain = strtolower($this->whmcs['mapped_domain']);
+		
+		if( trim($domain) . trim($mapped_domain) == '') {
+			$this->response['error'] = "$domain: " . __('Domain name is empty!', 'mrp');
+			return;
+		}
 
 		if (! preg_match('|^([a-zA-Z0-9-])+$|', $this->whmcs['domain'])){
 			$this->response['error'] = "$domain: " . __('Is not a valid domain name, alphanumeric and "-" only', 'mrp');
@@ -263,8 +269,6 @@ class WHMCS_Multisite_Provisioning{
 				return;
 			}
 		}
-
-		$mapped_domain = strtolower($this->whmcs['mapped_domain']);
 
 		//Is there already a domain with this mapping?
 		if($this->domain_mapping_active){

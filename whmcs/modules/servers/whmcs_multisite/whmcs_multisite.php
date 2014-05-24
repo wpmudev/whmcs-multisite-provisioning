@@ -181,6 +181,8 @@ function whmcs_multisite_CreateAccount($params) {
 		if (count($sub > 2)) $request['domain'] = $sub[0];
 		else $request['domain'] = $params['configoption2'];
 	}
+	
+	if( $request['domain'] . $request['mapped_domain'] == '') return 'Domain field is Empty!';
 
 	$request['title'] = ($params['configoption3'] == 'on' and !empty($customfields['Title'])) ? $customfields['Title'] : $params['configoption1'];
 
