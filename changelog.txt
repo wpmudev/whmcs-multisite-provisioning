@@ -3,8 +3,10 @@ Author: Arnold Bailey
 
 == Change Log ==
 
-= 1.1.0.4 =
+= 1.1.0.5 =
+- Fix for Delete blog error.
 
+= 1.1.0.4 =
 - Fixed problem with default site numbering.
 - Since the password on Wordpress can not be read, if WHMCS finds the user email already existing on WP it returns a "PREVIOUSLY SET" PASSWORD.
 
