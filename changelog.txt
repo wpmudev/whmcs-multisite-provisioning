@@ -3,6 +3,11 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.1.0.4 =
+
+- Fixed problem with default site numbering.
+- Since the password on Wordpress can not be read, if WHMCS finds the user email already existing on WP it returns a "PREVIOUSLY SET" PASSWORD.
+
 = 1.1.0.3 =
 - Added check for blank domains
 

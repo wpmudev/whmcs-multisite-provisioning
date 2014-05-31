@@ -8,7 +8,7 @@ Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.1.0.2
+Version: 1.1.0.4
 Network: true
 WDP ID: 264
 */
@@ -245,6 +245,9 @@ function whmcs_multisite_CreateAccount($params) {
 		}else{
 			$update['domain'] = $ret['mapped_domain'];
 		}
+		
+		if( !empty( $ret['password'] ) )			$update['servicepassword'] = $ret['password'];
+		
 		$result = localAPI('updateclientproduct', $update, $api_admin);
 
 		$result = ($result['result']=='success') ? $result['result'] : $result['message'];
