@@ -3,6 +3,9 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.1.0.6 =
+- Added check for Free level name which was previously indicated by a blank field.
+
 = 1.1.0.5 =
 - Fix for Delete blog error.
 

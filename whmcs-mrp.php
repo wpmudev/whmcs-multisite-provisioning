@@ -7,7 +7,7 @@ Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.1.0.5
+Version: 1.1.0.6
 Network: true
 WDP ID: 264
 */
@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if ( !is_multisite() )
 exit( __('The WHMCS Multisite Provisioning plugin is only compatible with WordPress Multisite.', 'mrp') );
 
-define('MRP_VERSION','1.1.0.5');
+define('MRP_VERSION','1.1.0.6');
 
 $whmcs_multisite_provisioning = new WHMCS_Multisite_Provisioning();
 
@@ -488,9 +488,12 @@ class WHMCS_Multisite_Provisioning{
 			}
 
 			if(empty($level_id) ) {
-				$this->response['error'] = __( "Invalid Pro Sites Level name in create_blog: $level",'mrp');
-				return;
+				if( ! strtolower( $psts->get_setting( 'free_name' ) ) == strtolower( $level ) ) {
+					$this->response['error'] = __( "Invalid Pro Sites Level name in create_blog: $level",'mrp');
+					return;
+				}
 			}
+			
 			$this->response['level'] = $level_id;
 
 			$ch_blog = $wpdb->get_row("SELECT blog_ID FROM " . $wpdb->base_prefix . "pro_sites WHERE blog_ID=$id LIMIT 1");
@@ -765,4 +768,4 @@ $wpmudev_notices[] = array( 'id'=> 264,
 'toplevel_page_mrp-settings-network',
 ) );
 
-include_once 'wpmudev-dash-notification.php';
+include_once 'dash-notice/wpmudev-dash-notification.php';
