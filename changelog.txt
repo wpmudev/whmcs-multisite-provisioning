@@ -3,6 +3,9 @@ Author: Arnold Bailey
 
 == Change Log ==
 
+= 1.1.0.7 =
+- Fixed POODLE vulnerability due to cURL SSL version 3 being forced.
+
 = 1.1.0.6 =
 - Added check for Free level name which was previously indicated by a blank field.
 

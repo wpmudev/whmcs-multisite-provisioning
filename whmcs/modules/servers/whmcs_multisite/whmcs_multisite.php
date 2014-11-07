@@ -76,7 +76,6 @@ function get_url( $url, $post_fields, $javascript_loop = 0, $timeout = 30 )
 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $post_fields);
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 	curl_setopt( $ch, CURLOPT_AUTOREFERER, true );
-	curl_setopt( $ch, CURLOPT_SSLVERSION, 3 );    // required for Open_ssl 1.0
 	curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, false );    // required for https urls
 	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    // required for https urls
 	curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
