@@ -8,7 +8,7 @@ Author: WPMU DEV
 Author Uri: http://premium.wpmudev.org/
 Text Domain: mrp
 Domain Path: languages
-Version: 1.1.0.5
+Version: 1.2
 Network: true
 WDP ID: 264
 */
@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 function whmcs_multisite_ConfigOptions() {
 
-	if( !defined('WPMU_WHMCS_SERVER_VERSION ') ) define('WPMU_WHMCS_SERVER_VERSION', '1.1');
+	if( !defined('WPMU_WHMCS_SERVER_VERSION ') ) define('WPMU_WHMCS_SERVER_VERSION', '1.2');
 
 	# Should return an array of the module options for each product - maximum of 24
 
