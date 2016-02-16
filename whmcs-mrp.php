@@ -356,7 +356,7 @@ class WHMCS_Multisite_Provisioning{
 				//
 				//					break;
 				//				}
-				$path = str_replace(trim($path,'/'), trim($path,'/') . $ndx++, $p);
+				$path = str_replace(trim($p,'/'), trim($p,'/') . $ndx++, $p);
 				$blog_details = get_blog_details(array('domain' => $newdomain, 'path' => $path));
 			}
 		}
