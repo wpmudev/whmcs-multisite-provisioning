@@ -2,6 +2,8 @@ Plugin Name: WHMCS Multisite Provisioning
 Author: Arnold Bailey
 
 == Change Log ==
+= 1.1.0.8 =
+- Fixed naming logic for duplicate blogs in sub-directory networks.
 
 = 1.1.0.7 =
 - Fixed POODLE vulnerability due to cURL SSL version 3 being forced.
