@@ -759,13 +759,3 @@ class WHMCS_Multisite_Provisioning{
 		<?php
 	}
 }
-
-/* -------------------- WPMU DEV Dashboard Notice -------------------- */
-global $wpmudev_notices;
-$wpmudev_notices[] = array( 'id'=> 264,
-'name'=> 'WHMCS Multisite Provisioning',
-'screens' => array(
-'toplevel_page_mrp-settings-network',
-) );
-
-include_once 'dash-notice/wpmudev-dash-notification.php';
